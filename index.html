@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A focused work cockpit with a timer, task queue, session stats, and ambience controls.">
+    <title>Focus Cockpit</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="status-panel" aria-label="Focus status">
+        <div>
+          <p class="eyebrow">Focus Cockpit</p>
+          <h1 id="modeTitle">Deep Work</h1>
+          <p class="subline">Timer, tasks, and tempo for getting locked in.</p>
+        </div>
+        <div class="tempo-card">
+          <span class="clock" id="clock">--:--</span>
+          <strong id="bpmReadout">132 BPM</strong>
+          <small>tempo engine</small>
+        </div>
+      </section>
+
+      <section class="cockpit">
+        <div class="timer-panel">
+          <div class="panel-topline">
+            <span>Live session</span>
+            <span id="energyLabel">Standby</span>
+          </div>
+          <div class="mode-tabs" role="tablist" aria-label="Timer modes">
+            <button class="mode is-active" data-minutes="25" data-label="Deep Work">Focus</button>
+            <button class="mode" data-minutes="5" data-label="Short Reset">Break</button>
+            <button class="mode" data-minutes="15" data-label="Long Reset">Long</button>
+          </div>
+
+          <div class="dial" aria-label="Timer progress">
+            <svg viewBox="0 0 240 240" role="img" aria-labelledby="timerLabel">
+              <title id="timerLabel">Session timer</title>
+              <circle class="track" cx="120" cy="120" r="101"></circle>
+              <circle class="progress" id="progressRing" cx="120" cy="120" r="101"></circle>
+            </svg>
+            <div class="time-readout">
+              <span id="time">25:00</span>
+              <small id="timerHint">Ready when you are</small>
+            </div>
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+          </div>
+
+          <div class="equalizer" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="controls">
+            <button class="primary" id="startPause">Start</button>
+            <button id="reset">Reset</button>
+          </div>
+
+          <label class="slider-row">
+            <span>Session length</span>
+            <output id="minutesOutput">25 min</output>
+            <input id="minutes" type="range" min="5" max="90" step="5" value="25">
+          </label>
+        </div>
+
+        <aside class="side-panel">
+          <section class="panel-block progress-card" aria-label="Session progress">
+            <div class="section-head">
+              <h2>Session Progress</h2>
+              <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress-bar" aria-hidden="true">
+              <span id="progressBar"></span>
+            </div>
+          </section>
+
+          <section class="panel-block">
+            <div class="section-head">
+              <h2>Queue</h2>
+              <span id="taskCount">0 open</span>
+            </div>
+            <form id="taskForm" class="task-form">
+              <input id="taskInput" type="text" maxlength="64" placeholder="Add a focus task" autocomplete="off">
+              <button aria-label="Add task">+</button>
+            </form>
+            <ul id="tasks" class="tasks" aria-label="Focus tasks"></ul>
+          </section>
+
+          <section class="panel-block stats-grid" aria-label="Session stats">
+            <div>
+              <span id="sessions">0</span>
+              <small>Sessions</small>
+            </div>
+            <div>
+              <span id="minutesDone">0</span>
+              <small>Minutes</small>
+            </div>
+            <div>
+              <span id="streak">0</span>
+              <small>Streak</small>
+            </div>
+          </section>
+
+          <section class="panel-block">
+            <div class="section-head">
+              <h2>Energy Mode</h2>
+              <span id="ambienceLabel">Standby</span>
+            </div>
+            <div class="sound-grid">
+              <button class="sound" data-sound="low">Low</button>
+              <button class="sound" data-sound="flow">Flow</button>
+              <button class="sound" data-sound="drive">Drive</button>
+              <button class="sound" data-sound="rave">Rave</button>
+            </div>
+            <label class="slider-row compact">
+              <span>Tempo</span>
+              <output id="tempoOutput">132 BPM</output>
+              <input id="tempo" type="range" min="118" max="150" step="2" value="132">
+            </label>
+            <label class="slider-row compact">
+              <span>Volume</span>
+              <output id="volumeOutput">35%</output>
+              <input id="volume" type="range" min="0" max="100" value="35">
+            </label>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
